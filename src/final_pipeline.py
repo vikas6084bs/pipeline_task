@@ -6,49 +6,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType
 from pyspark.sql.functions import col, sum, count, date_format, round, when
 import os
-
-def create_spark_session():
-    """Create Spark session with proper configuration"""
-    spark = SparkSession.builder \
-        .appName("EcommercePipeline") \
-        .master("local[*]") \
-        .config("spark.sql.adaptive.enabled", "true") \
-        .config("spark.sql.legacy.timeParserPolicy", "LEGACY") \
-        .config("spark.sql.warehouse.dir", "file:///C:/temp/spark-warehouse") \
-        .getOrCreate()
-    
-    spark.sparkContext.setLogLevel("ERROR")
-    print("✅ Spark session created successfully!")
-    return spark
-
-def main():
-    print("=== PYSPARK E-COMMERCE PIPELINE ===")
-    
-    # Create Spark session
-    spark = create_spark_session()
-    
-    try:
-        # Your data processing code here
-        print("Spark is working! Now you can add your data processing logic.")
-        
-        # Test with simple operation
-        data = [("John", 25), ("Jane", 30), ("Bob", 35)]
-        df = spark.createDataFrame(data, ["Name", "Age"])
-        df.show()
-        
-    except Exception as e:
-        print(f"Error: {e}")
-        import traceback
-        traceback.print_exc()
-    finally:
-        spark.stop()
-
-if __name__ == "__main__":
-    main()
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType
-from pyspark.sql.functions import col, sum, count, date_format, round, when
-import os
 import subprocess
 
 def setup_environment():
@@ -272,4 +229,5 @@ def main():
         print("Spark session stopped.")
 
 if __name__ == "__main__":
+
     main()
